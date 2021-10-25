@@ -23,8 +23,8 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <>
-          <StatusBar style="dark" />
+      <> 
+          <StatusBar style="light" backgroundColor="#78797b" />
           <Home />
       </>
     )

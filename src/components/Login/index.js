@@ -9,10 +9,10 @@ import { StatusBar } from "expo-status-bar";
 
 export function Login() {
     return (
-        <PaperProvider theme={theme}>
+        <PaperProvider theme={theme} >
             <View style={styles.container}>
 
-                <StatusBar style="inverted" backgroundColor='#78797b' />
+                <StatusBar style="light" backgroundColor='#78797b' />
                 <View style={styles.view}>
                     <Card style={styles.borderCard}>
                         <Card.Title
@@ -21,18 +21,13 @@ export function Login() {
 
                         <Card.Content>
 
-                            <TextInput label="Email"
-                                keyboardType='email-address'
+                            <TextInput label="E-mail"
                                 style={styles.cardInput}
-                            />
-
+                                keyboardType='email-address' />
 
                             <TextInput label="Senha"
-                                secureTextEntry={true}
                                 style={styles.cardInput}
-                                
-                            />
-
+                                secureTextEntry={true}/>
 
                             <Button uppercase={false} style={styles.cardButton} color='#000'>
                                 Esqueci minha senha
@@ -49,6 +44,6 @@ export function Login() {
                     </Card>
                 </View>
             </View>
-        </PaperProvider>
+        </PaperProvider >
     )
 }
