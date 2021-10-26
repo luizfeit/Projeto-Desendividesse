@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 
 import { styles, theme } from './styles';
 
@@ -16,7 +16,8 @@ import { Header } from '../Header/header.component';
 
 export function RegistroMovimentacao() {
 
-    const { tipo, setTipo} = useState("1");
+    const [tipo, setTipo] = useState("1");
+    console.log(tipo)
 
     return (
         <PaperProvider theme={theme}>
@@ -25,7 +26,7 @@ export function RegistroMovimentacao() {
                 <View style={styles.container}>
                     <View>
                         <Card style={styles.borderCard}>
-                            <Card.Title title="Nova Movimentação"  />
+                            <Card.Title title="Nova Movimentação" />
                             <Card.Content>
 
                                 <TextInput label="Valor"
@@ -33,37 +34,37 @@ export function RegistroMovimentacao() {
                                     style={styles.cardInput} />
 
                                 <RadioButton.Group
-                                   onValueChange={value => setTipo(tipo = value)}
+                                    onValueChange={setTipo}
                                     value={tipo}>
 
                                     <View>
-                                    <Text>Crédito</Text>
-                                    <RadioButton value="1" />
+                                        <Text>Crédito</Text>
+                                        <RadioButton value="1" />
                                     </View>
 
                                     <View>
-                                    <Text>Débito</Text>
-                                    <RadioButton value="2" />
+                                        <Text>Débito</Text>
+                                        <RadioButton value="2" />
                                     </View>
 
                                     <View>
-                                    <Text>Transferência</Text>
-                                    <RadioButton value="3" />
+                                        <Text>Transferência</Text>
+                                        <RadioButton value="3" />
                                     </View>
 
                                     <View>
-                                    <Text>Saque</Text>
-                                    <RadioButton value="4" />
+                                        <Text>Saque</Text>
+                                        <RadioButton value="4" />
                                     </View>
 
-                                </RadioButton.Group>    
+                                </RadioButton.Group>
 
                                 <TextInput label="Tag"
                                     style={styles.cardInput}
                                     disabled />
 
                                 <TextInput label="Descrição"
-                                    style={styles.cardInput} />    
+                                    style={styles.cardInput} />
 
                                 <Button mode="contained"
                                     style={styles.cardRegister}>

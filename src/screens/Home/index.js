@@ -8,6 +8,7 @@ import { Cadastro } from '../../components/Cadastro';
 import { RegistroMovimentacao } from '../../components/RegistroMovimentacao';
 
 
+
 export function Home() {
 
     return (
