@@ -7,6 +7,7 @@ import { styles, theme } from './styles';
 import {
     Button,
     Card,
+    Chip,
     Provider as PaperProvider,
     RadioButton,
     TextInput
@@ -62,6 +63,10 @@ export function RegistroMovimentacao() {
                                 <TextInput label="Tag"
                                     style={styles.cardInput}
                                     disabled />
+                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed')}>Example Chip</Chip>
+                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed1')}>Example 1</Chip>
+                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed2')}>Example 2</Chip>
+                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed3')}>Example 3</Chip>
 
                                 <TextInput label="Descrição"
                                     style={styles.cardInput} />
