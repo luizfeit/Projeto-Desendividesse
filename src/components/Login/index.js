@@ -7,7 +7,7 @@ import { Button, Card, Provider as PaperProvider, TextInput } from "react-native
 import { StatusBar } from "expo-status-bar";
 
 
-export function Login() {
+export function Login({ navigation }) {
     return (
         <PaperProvider theme={theme} >
             <View style={styles.container}>
@@ -32,11 +32,13 @@ export function Login() {
                             <Button uppercase={false} style={styles.cardButton} color='#000'>
                                 Esqueci minha senha
                             </Button>
-                            <Button mode='contained' style={styles.cardLogin} >
+                            <Button mode='contained' style={styles.cardLogin}
+                            onPress={() => navigation.navigate('Inicial')} >
                                 Login
                             </Button>
 
-                            <Button uppercase={false} style={styles.cardButton} color='#000' >
+                            <Button uppercase={false} style={styles.cardButton} color='#000' 
+                            onPress={() => navigation.navigate('Cadastro')} >
                                 Cadastre-se
                             </Button>
 
