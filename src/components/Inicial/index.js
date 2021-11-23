@@ -4,6 +4,15 @@ import { ScrollView, View , Text} from 'react-native';
 
 import { styles, theme } from './styles';
 
+import {
+    Button,
+    Card,
+    Chip,
+    Provider as PaperProvider,
+    RadioButton,
+    TextInput
+} from "react-native-paper";
+
 import { Header } from '../Header/header.component';
 
 export function Inicial () {
