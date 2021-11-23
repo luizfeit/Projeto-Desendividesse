@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View } from "react-native";
 
 import { styles, theme } from "./styles";
@@ -6,8 +6,20 @@ import { styles, theme } from "./styles";
 import { Button, Card, Provider as PaperProvider, TextInput } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
 
+import Usuarios from "../../services/database/Usuarios";
+
 
 export function Login() {
+
+    const [email, setEmail] = useState(null);
+    const [senha, setSenha] = useState(null);
+
+    const ValidarLogin = (id_usuario) => {
+        Usuarios.find({ id_usuario, email, senha })
+            .then(id_usuario => console.log("Usuario encontrado" + id_usuario))
+            .catch(err => console.log(err))
+    }
+
     return (
         <PaperProvider theme={theme} >
             <View style={styles.container}>
@@ -23,16 +35,22 @@ export function Login() {
 
                             <TextInput label="E-mail"
                                 style={styles.cardInput}
-                                keyboardType='email-address' />
+                                keyboardType='email-address'
+                                value={email}
+                                onChangeText={email => setEmail(email)}
+                            />
 
                             <TextInput label="Senha"
                                 style={styles.cardInput}
-                                secureTextEntry={true}/>
+                                secureTextEntry={true}
+                                value={senha}
+                                onChangeText={senha => setSenha(senha)} />
 
                             <Button uppercase={false} style={styles.cardButton} color='#000'>
                                 Esqueci minha senha
                             </Button>
-                            <Button mode='contained' style={styles.cardLogin} >
+                            <Button mode='contained' style={styles.cardLogin}
+                                onPress={() => ValidarLogin()}>
                                 Login
                             </Button>
 

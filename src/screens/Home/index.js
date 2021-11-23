@@ -16,8 +16,8 @@ export function Home() {
 
     return (
         <View style={styles.container}>
-            {/* < Login /> */}
-            < Cadastro />
+            < Login />
+            {/* < Cadastro /> */}
             {/* < RegistroMovimentacao /> */}
             {/* < RegistroMeta /> */}
             {/* < Inicial /> */}

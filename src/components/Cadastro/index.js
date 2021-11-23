@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ScrollView, View } from 'react-native';
 
 import { styles, theme } from './styles';
+
+import Usuarios from '../../services/database/Usuarios';
 
 import {
     Button,
@@ -13,7 +15,23 @@ import {
 
 import { Header } from '../Header/header.component';
 
+const printUsu = (usu) => {
+    console.log(`id:${usu.id_usuario}, name:${usu.nome}, email:${usu.email}, password:${usu.senha}`)
+}
+
 export function Cadastro() {
+
+    const [nome, setNome] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [senha, setSenha] = useState(null)
+    const [confirmarSenha, setConfirmarSenha] = useState(null)
+
+    const RegistrarUsuario = () => {
+        Usuarios.create({nome, email, senha})
+            .then(id_usuario => console.log("Usuarios Criado com o id:" + id_usuario))
+            .catch(err => console.error(err))
+    }
+
     return (
         <PaperProvider theme={theme}>
             <Header title="Cadastro" />
@@ -25,28 +43,33 @@ export function Cadastro() {
                             <Card.Content>
 
                                 <TextInput label="Nome"
-                                    style={styles.cardInput} />
+                                    style={styles.cardInput}
+                                    value={nome}
+                                    onChangeText={nome => setNome(nome || null)} />
 
                                 <TextInput label="E-mail"
                                     keyboardType="email-address"
-                                    style={styles.cardInput} />
+                                    style={styles.cardInput}
+                                    value={email}
+                                    onChangeText={email => setEmail(email || null)} />
 
                                 <TextInput label="Senha"
                                     secureTextEntry={true}
                                     right={<TextInput.Icon name="eye-off-outline" />}
-                                    style={styles.cardInput} />
+                                    style={styles.cardInput}
+                                    value={senha}
+                                    onChangeText={senha => setSenha(senha || null)} />
 
                                 <TextInput label="Confirmar Senha"
                                     secureTextEntry={true}
                                     right={<TextInput.Icon name="eye-off-outline" />}
-                                    style={styles.cardInput} />
-
-                                <TextInput label="Telefone"
-                                    keyboardType="phone-pad"
-                                    style={styles.cardInput} />
+                                    style={styles.cardInput}
+                                    value={confirmarSenha || null}
+                                    onChangeText={confirmarSenha => setConfirmarSenha(confirmarSenha)} />
 
                                 <Button mode="contained"
-                                    style={styles.cardRegister}>
+                                    style={styles.cardRegister}
+                                    onPress={(nome, email, senha) => RegistrarUsuario(nome, senha, email)}>
                                     Cadastrar
                                 </Button>
 
