@@ -9,7 +9,6 @@ import { StatusBar } from "expo-status-bar";
 import Usuarios from "../../services/database/Usuarios";
 
 
-<<<<<<< HEAD
 export function Login() {
 
     const [email, setEmail] = useState(null);
@@ -21,9 +20,7 @@ export function Login() {
             .catch(err => console.log(err))
     }
 
-=======
 export function Login({ navigation }) {
->>>>>>> origin
     return (
         <PaperProvider theme={theme} >
             <View style={styles.container}>
@@ -54,11 +51,8 @@ export function Login({ navigation }) {
                                 Esqueci minha senha
                             </Button>
                             <Button mode='contained' style={styles.cardLogin}
-<<<<<<< HEAD
-                                onPress={() => ValidarLogin()}>
-=======
-                            onPress={() => navigation.navigate('Inicial')} >
->>>>>>> origin
+                                onPress={() => ValidarLogin()}
+                                onPress={() => navigation.navigate('Inicial')} >
                                 Login
                             </Button>
 
@@ -73,4 +67,5 @@ export function Login({ navigation }) {
             </View>
         </PaperProvider >
     )
+}
 }

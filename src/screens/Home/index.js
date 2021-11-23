@@ -20,16 +20,6 @@ export function Home() {
     const Stack = createNativeStackNavigator();
 
     return (
-<<<<<<< HEAD
-        <View style={styles.container}>
-            < Login />
-            {/* < Cadastro /> */}
-            {/* < RegistroMovimentacao /> */}
-            {/* < RegistroMeta /> */}
-            {/* < Inicial /> */}
-            {/* < Historico /> */}
-        </View>
-=======
         <NavigationContainer>
             <View style={styles.container}>
             <Stack.Navigator initialRouteName="Login" >
@@ -42,6 +32,5 @@ export function Home() {
             </Stack.Navigator>
             </View>
         </NavigationContainer>
->>>>>>> origin
     );
 }
