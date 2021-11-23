@@ -34,7 +34,7 @@ export function Cadastro() {
 
     return (
         <PaperProvider theme={theme}>
-            <Header title="Cadastro" />
+            {/* <Header title="Cadastro" /> */}
             <ScrollView style={styles.background}>
                 <View style={styles.container}>
                     <View>

@@ -9,18 +9,20 @@ import { StatusBar } from "expo-status-bar";
 import Usuarios from "../../services/database/Usuarios";
 
 
-export function Login() {
+export function Login({ navigation }) {
 
     const [email, setEmail] = useState(null);
     const [senha, setSenha] = useState(null);
 
-    const ValidarLogin = (id_usuario) => {
-        Usuarios.find({ id_usuario, email, senha })
-            .then(id_usuario => console.log("Usuario encontrado" + id_usuario))
-            .catch(err => console.log(err))
+    const ValidarLogin = (email, senha) => {
+        Usuarios.findUser(email, senha)
+            .then(navigation.navigate('Inicial'))
+            .catch(err => alert(err))
     }
+    const printUser = (user) => {
+        console.log(`id_usuario:${user.id_usuario}, nome:${user.nome}, email:${user.email}, senha:${user.senha}`)
+      }
 
-export function Login({ navigation }) {
     return (
         <PaperProvider theme={theme} >
             <View style={styles.container}>
@@ -47,17 +49,26 @@ export function Login({ navigation }) {
                                 value={senha}
                                 onChangeText={senha => setSenha(senha)} />
 
-                            <Button uppercase={false} style={styles.cardButton} color='#000'>
+                            <Button uppercase={false} style={styles.cardButton} color='#000'
+                            // onPress={() => Usuarios.create({nome:'Matheus', email:'matheus@', senha:'1234' })
+                            // .then( id => console.log('User created with id: '+ id) )
+                            // .catch( err => console.log(err) )}
+                            >
                                 Esqueci minha senha
                             </Button>
                             <Button mode='contained' style={styles.cardLogin}
-                                onPress={() => ValidarLogin()}
-                                onPress={() => navigation.navigate('Inicial')} >
+                                onPress={() => ValidarLogin(email, senha)}
+                                >
                                 Login
                             </Button>
 
                             <Button uppercase={false} style={styles.cardButton} color='#000' 
-                            onPress={() => navigation.navigate('Cadastro')} >
+                            onPress={() => navigation.navigate('Cadastro')}
+                            // onPress={() => Usuarios.find(1)
+                            //     .then(user => printUser(user))
+                            //     .catch(err => console.log(err))
+    // }
+                             >
                                 Cadastre-se
                             </Button>
 
@@ -67,5 +78,4 @@ export function Login({ navigation }) {
             </View>
         </PaperProvider >
     )
-}
 }
