@@ -16,7 +16,7 @@ export function Login({ navigation }) {
 
     const ValidarLogin = (email, senha) => {
         Usuarios.findUser(email, senha)
-            .then(navigation.navigate('Inicial'))
+            .then(() => navigation.navigate('RegistroMeta'))
             .catch(err => alert(err))
     }
     const printUser = (user) => {
@@ -50,9 +50,9 @@ export function Login({ navigation }) {
                                 onChangeText={senha => setSenha(senha)} />
 
                             <Button uppercase={false} style={styles.cardButton} color='#000'
-                            // onPress={() => Usuarios.create({nome:'Matheus', email:'matheus@', senha:'1234' })
-                            // .then( id => console.log('User created with id: '+ id) )
-                            // .catch( err => console.log(err) )}
+                            // onPress={() => Usuarios.find(2)
+                            //     .then(user => printUser(user))
+                            //     .catch(err => console.log(err))}
                             >
                                 Esqueci minha senha
                             </Button>
@@ -64,10 +64,6 @@ export function Login({ navigation }) {
 
                             <Button uppercase={false} style={styles.cardButton} color='#000' 
                             onPress={() => navigation.navigate('Cadastro')}
-                            // onPress={() => Usuarios.find(1)
-                            //     .then(user => printUser(user))
-                            //     .catch(err => console.log(err))
-    // }
                              >
                                 Cadastre-se
                             </Button>
