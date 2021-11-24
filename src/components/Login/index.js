@@ -21,7 +21,7 @@ export function Login({ navigation }) {
     }
     const printUser = (user) => {
         console.log(`id_usuario:${user.id_usuario}, nome:${user.nome}, email:${user.email}, senha:${user.senha}`)
-      }
+    }
 
     return (
         <PaperProvider theme={theme} >
@@ -40,14 +40,14 @@ export function Login({ navigation }) {
                                 style={styles.cardInput}
                                 keyboardType='email-address'
                                 value={email}
-                                onChangeText={email => setEmail(email)}
+                                onChangeText={email => setEmail(email || null)}
                             />
 
                             <TextInput label="Senha"
                                 style={styles.cardInput}
                                 secureTextEntry={true}
                                 value={senha}
-                                onChangeText={senha => setSenha(senha)} />
+                                onChangeText={senha => setSenha(senha || null)} />
 
                             <Button uppercase={false} style={styles.cardButton} color='#000'
                             // onPress={() => Usuarios.find(2)
@@ -58,7 +58,7 @@ export function Login({ navigation }) {
                             </Button>
                             <Button mode='contained' style={styles.cardLogin}
                                 onPress={() => ValidarLogin(email, senha)}
-                                >
+                            >
                                 Login
                             </Button>
 
