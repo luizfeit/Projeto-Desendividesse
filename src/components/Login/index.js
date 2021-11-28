@@ -16,10 +16,8 @@ export function Login({ navigation }) {
 
     const ValidarLogin = (email, senha) => {
         Usuarios.findUser(email, senha)
-            .then(() => navigation.navigate('Historico'))
+            .then((user) => navigation.navigate('Inicial', {UserId: user.id_usuario, OtherParam: 'Rapadura'}))
             .catch(err => alert(err))
-
-            findIDUsuario(email, senha)
     }
     const printUser = (user) => {
         console.log(`id_usuario:${user.id_usuario}, nome:${user.nome}, email:${user.email}, senha:${user.senha}`)
@@ -60,9 +58,9 @@ export function Login({ navigation }) {
                                 onChangeText={senha => setSenha(senha || null)} />
 
                             <Button uppercase={false} style={styles.cardButton} color='#000'
-                            // onPress={() => Usuarios.find(2)
-                            //     .then(user => printUser(user))
-                            //     .catch(err => console.log(err))}
+                            onPress={() => Usuarios.find(1)
+                                .then(user => printUser(user))
+                                .catch(err => console.log(err))}
                             >
                                 Esqueci minha senha
                             </Button>
