@@ -16,7 +16,7 @@ export function Login({ navigation }) {
 
     const ValidarLogin = (email, senha) => {
         Usuarios.findUser(email, senha)
-            .then((user) => navigation.navigate('Inicial', {UserId: user.id_usuario, OtherParam: 'Rapadura'}))
+            .then((user) => navigation.navigate('Inicial', { UserId: user.id_usuario, OtherParam: 'Rapadura' }))
             .catch(err => alert(err))
     }
     const printUser = (user) => {
@@ -25,12 +25,13 @@ export function Login({ navigation }) {
 
     const findIDUsuario = (email, senha) => {
         Usuarios.find(email, senha)
-        .then(id_usuario => console.log(`O id do usuarios logado é ${id_usuario}`))
-        .catch(err => alert(err))
+            .then(id_usuario => console.log(`O id do usuarios logado é ${id_usuario}`))
+            .catch(err => alert(err))
     }
-    
+
     return (
         <PaperProvider theme={theme} >
+
             <View style={styles.container}>
 
                 <StatusBar style="light" backgroundColor='#78797b' />
@@ -38,7 +39,7 @@ export function Login({ navigation }) {
                     <Card style={styles.borderCard}>
                         <Card.Title
                             title="Login"
-                            
+
                             titleStyle={styles.cardTitle} />
 
                         <Card.Content>
@@ -47,7 +48,7 @@ export function Login({ navigation }) {
                                 style={styles.cardInput}
                                 keyboardType='email-address'
                                 value={email}
-                                
+
                                 onChangeText={email => setEmail(email || null)}
                             />
 
@@ -57,15 +58,18 @@ export function Login({ navigation }) {
                                 value={senha}
                                 onChangeText={senha => setSenha(senha || null)} />
 
-                            <Button uppercase={false} style={styles.cardButton} color='#000'
-                            onPress={() => Usuarios.find(1)
-                                .then(user => printUser(user))
-                                .catch(err => console.log(err))}
+                            <Button
+                                uppercase={false}
+                                style={styles.cardButton} color='#000'
+                                onPress={() => Usuarios.find(1)
+                                    .then(user => printUser(user))
+                                    .catch(err => console.log(err))}
                             >
                                 Esqueci minha senha
                             </Button>
+
                             <Button mode='contained' style={styles.cardLogin}
-                                onPress={() => ValidarLogin(email,senha)}
+                                onPress={() => ValidarLogin(email, senha)}
                             >
                                 Login
                             </Button>

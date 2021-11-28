@@ -22,7 +22,6 @@ export function RegistroMovimentacao() {
 
     return (
         <PaperProvider theme={theme}>
-            <Header title="Movimentação" />
             <ScrollView style={styles.background}>
                 <View style={styles.container}>
                     <View>

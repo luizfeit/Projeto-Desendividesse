@@ -34,7 +34,6 @@ export function RegistroMeta() {
 
     return (
         <PaperProvider theme={theme}>
-            <Header title="Metas" />
             <ScrollView style={styles.background}>
                 <View style={styles.container}>
                     <View>

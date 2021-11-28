@@ -9,11 +9,17 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#78797b',
     },
+    background: {
+        backgroundColor: '#78797b'
+    },
     view: {
         width: '80%',
     },
     borderCard: {
-        borderRadius: 10,
+        borderRadius: 3,
+        minWidth: 300,
+        minHeight: 70,
+        marginTop: 15
     },
     cardTitle: {
         fontSize: 28,

@@ -13,7 +13,6 @@ import { Header } from '../Header/header.component';
 export function Historico () {
     return (
         <PaperProvider theme={theme}>
-            <Header title="Histórico de Movimentações" />
             <ScrollView style={styles.background}>
             <DataTable>
         <DataTable.Header>
