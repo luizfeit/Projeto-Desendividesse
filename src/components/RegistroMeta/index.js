@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import Metas from '../../services/database/Metas';
 
-import { ScrollView, View, Text} from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 
 import { styles, theme } from './styles';
 
@@ -17,19 +17,19 @@ import {
 
 import { Header } from '../Header/header.component';
 
-export function RegistroMeta () {
+export function RegistroMeta() {
 
     const [date, setDate] = useState(new Date());
- 
+
     const [titulo, setTitulo] = useState(null);
     const [valor, setValor] = useState(null);
     const [descricao, setDescricao] = useState(null);
     // const id_user = (user.id);
 
     const RegistraMeta = () => {
-        Metas.create({titulo, data, valor, descricao, id_user})
-        .then(id_meta => console.log('Meta registrada com id=' + id_meta))
-        .catch(err => console.log(err))
+        Metas.create({ titulo, data, valor, descricao, id_user })
+            .then(id_meta => console.log('Meta registrada com id=' + id_meta))
+            .catch(err => console.log(err))
     }
 
     return (
@@ -38,43 +38,43 @@ export function RegistroMeta () {
             <ScrollView style={styles.background}>
                 <View style={styles.container}>
                     <View>
-                    <Card style={styles.borderCard}>
-                        <Card.Title title="Nova Meta" />
-                        <Card.Content>
+                        <Card style={styles.borderCard}>
+                            <Card.Title title="Nova Meta" />
+                            <Card.Content>
 
-                            <TextInput label="Título"
-                            style={styles.cardInput} 
-                            value={titulo}
-                            onChangeText={titulo => setTitulo(titulo || null)}/>
+                                <TextInput label="Título"
+                                    style={styles.cardInput}
+                                    value={titulo}
+                                    onChangeText={titulo => setTitulo(titulo || null)} />
 
-                            <TextInput label="Valor"
-                            keyboardType="numeric"
-                            style={styles.cardInput} 
-                            value={valor}
-                            onChangeText={valor => setValor(valor || null)}/>
-
-                            <DatePicker date={date} onDateChange={setDate}
+                                <TextInput label="Valor"
+                                    keyboardType="numeric"
+                                    style={styles.cardInput}
+                                    value={valor}
+                                    onChangeText={valor => setValor(valor || null)} />
+                                {/* 
+                                <DatePicker date={date} onDateChange={setDate}
                             //label="Selecione a Data Final" 
-                            />;
+                           >; */}
 
-                            <TextInput label="Descrição"
-                            style={styles.cardInput}
-                            value={descricao}
-                            onChangeText={descricao => setDescricao(descricao || null)}/>
+                                <TextInput label="Descrição"
+                                    style={styles.cardInput}
+                                    value={descricao}
+                                    onChangeText={descricao => setDescricao(descricao || null)} />
 
-                            <Button mode="contained"
-                            style={styles.cardRegister}
-                            onPress={() => RegistraMeta(titulo, data, valor, descricao, id_user)}>
-                            Salvar
-                            </Button>
+                                <Button mode="contained"
+                                    style={styles.cardRegister}
+                                    onPress={() => RegistraMeta(titulo, data, valor, descricao, id_user)}>
+                                    Salvar
+                                </Button>
 
-                            <Button mode="contained"
-                            style={styles.cardRegister}>
-                            Cancelar
-                            </Button>
+                                <Button mode="contained"
+                                    style={styles.cardRegister}>
+                                    Cancelar
+                                </Button>
 
-                        </Card.Content>
-                    </Card>
+                            </Card.Content>
+                        </Card>
                     </View>
                 </View>
             </ScrollView>

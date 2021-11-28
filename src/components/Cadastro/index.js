@@ -69,7 +69,7 @@ export function Cadastro() {
 
                                 <Button mode="contained"
                                     style={styles.cardRegister}
-                                    onPress={() => RegistrarUsuario(nome, senha, email)}>
+                                    onPress={() => RegistrarUsuario(nome, email, senha )}>
                                     Cadastrar
                                 </Button>
 
