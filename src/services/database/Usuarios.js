@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import db from "./SqLiteDataBase";
 
 /*
@@ -6,7 +7,7 @@ import db from "./SqLiteDataBase";
 */
 db.transaction((tx) => {
   //<<<<<<SOMENTE PARA TESTES>>>>>>
-  // tx.executeSql("DROP TABLE usuarios;");
+  tx.executeSql("DROP TABLE usuarios;");
   //<<<<<<SOMENTE PARA TESTES>>>>>>
 
   tx.executeSql(
@@ -32,9 +33,11 @@ const create = (obj) => {
         //-----------------------
         (_, { rowsAffected, insertId }) => {
           if (rowsAffected > 0) resolve(insertId);
-          else reject("Error inserting obj: " + JSON.stringify(obj)); // insert falhou
+          else reject("Preencha todos os campos"); // insert falhou
         },
-        (_, error) => reject(error) // erro interno em tx.executeSql
+        () => {
+          Alert.alert("Preencha todos os campos corretamente")
+        } // erro interno em tx.executeSql
       );
     });
   });
@@ -108,7 +111,7 @@ const findUser = (email, senha) => {
         //-----------------------
         (_, { rows }) => {
           if (rows.length > 0) resolve(rows._array[0]);
-          else reject("Obj not found: email =" + email); // nenhum registro encontrado
+          else reject("Email ou Senha incorreta"); // nenhum registro encontrado
         },
         (_, error) => reject(error) // erro interno em tx.executeSql
       );

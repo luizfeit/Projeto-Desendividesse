@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Alert } from 'react-native';
 
 import { styles, theme } from './styles';
 
@@ -19,17 +19,34 @@ const printUsu = (usu) => {
     console.log(`id:${usu.id_usuario}, name:${usu.nome}, email:${usu.email}, password:${usu.senha}`)
 }
 
-export function Cadastro() {
+export function Cadastro({ navigation }) {
 
     const [nome, setNome] = useState(null)
     const [email, setEmail] = useState(null)
     const [senha, setSenha] = useState(null)
     const [confirmarSenha, setConfirmarSenha] = useState(null)
+    const [icon, setIcon] = useState("eye-off")
+    const [icon2, setIcon2] = useState("eye-off")
+    const [visible, setVisible] = useState(true)
+    const [visible2, setVisible2] = useState(true)
 
     const RegistrarUsuario = () => {
-        Usuarios.create({nome, email, senha})
-            .then(id_usuario => console.log("Usuarios Criado com o id:" + id_usuario))
-            .catch(err => console.error(err))
+        if (!confirmarSenha) {
+            Alert.alert("Preencha todos os campos corretamente")
+        } else if (senha === confirmarSenha) {
+            Usuarios.create({ nome, email, senha })
+                .then((id_usuario) => {
+                    console.log("Usuarios Criado com o id:" + id_usuario)
+                    Alert.alert("Usuario Cadastro com Sucesso",
+                        navigation.navigate('Login')
+                    )
+
+                })
+                .catch(err => console.error(err))
+
+        } else {
+            Alert.alert("As senhas não são iguais ")
+        }
     }
 
     return (
@@ -54,24 +71,32 @@ export function Cadastro() {
                                     onChangeText={email => setEmail(email || null)} />
 
                                 <TextInput label="Senha"
-                                    secureTextEntry={true}
-                                    right={<TextInput.Icon name="eye-off-outline" />}
+                                    secureTextEntry={visible ? true : false}
+                                    right={<TextInput.Icon name={icon ? "eye-off" : "eye-outline"}
+                                        onPress={() => setIcon(!icon, setVisible(!visible))} />}
                                     style={styles.cardInput}
                                     value={senha}
                                     onChangeText={senha => setSenha(senha || null)} />
 
                                 <TextInput label="Confirmar Senha"
-                                    secureTextEntry={true}
-                                    right={<TextInput.Icon name="eye-off-outline" />}
+                                    secureTextEntry={visible2 ? true : false}
+                                    right={<TextInput.Icon name={icon2 ? "eye-off" : "eye-outline"}
+                                        onPress={() => setIcon2(!icon2, setVisible2(!visible2))} />}
                                     style={styles.cardInput}
                                     value={confirmarSenha || null}
                                     onChangeText={confirmarSenha => setConfirmarSenha(confirmarSenha)} />
 
                                 <Button mode="contained"
                                     style={styles.cardRegister}
-                                    onPress={() => RegistrarUsuario(nome, email, senha )}>
+                                    onPress={() => RegistrarUsuario(nome, email, senha)}>
                                     Cadastrar
                                 </Button>
+
+                                <Button mode="outlined"
+                                    style={styles.cardRegister}>
+                                    Cancelar
+                                </Button>
+
 
                             </Card.Content>
                         </Card>

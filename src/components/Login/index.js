@@ -13,10 +13,12 @@ export function Login({ navigation }) {
 
     const [email, setEmail] = useState(null);
     const [senha, setSenha] = useState(null);
+    const [icon, setIcon] = useState("eye-off");
+    const [visible, setVisible] = useState(true);
 
     const ValidarLogin = (email, senha) => {
         Usuarios.findUser(email, senha)
-            .then((user) => navigation.navigate('Inicial', { UserId: user.id_usuario, OtherParam: 'Rapadura' }))
+            .then((user) => navigation.navigate('Inicial', { UserId: user.id_usuario, OtherParam: user.email, TestParam: user.senha }))
             .catch(err => alert(err))
     }
     const printUser = (user) => {
@@ -54,7 +56,9 @@ export function Login({ navigation }) {
 
                             <TextInput label="Senha"
                                 style={styles.cardInput}
-                                secureTextEntry={true}
+                                secureTextEntry={visible}
+                                right={<TextInput.Icon name={icon ? "eye-off" : "eye-outline"}
+                                onPress={() => setIcon(!icon, setVisible(!visible))}/>}
                                 value={senha}
                                 onChangeText={senha => setSenha(senha || null)} />
 

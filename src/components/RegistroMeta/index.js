@@ -33,6 +33,7 @@ export function RegistroMeta() {
     }
 
     return (
+        
         <PaperProvider theme={theme}>
             <ScrollView style={styles.background}>
                 <View style={styles.container}>
@@ -67,8 +68,8 @@ export function RegistroMeta() {
                                     Salvar
                                 </Button>
 
-                                <Button mode="contained"
-                                    style={styles.cardRegister}>
+                                <Button mode="outlined"
+                                    style={styles.a}>
                                     Cancelar
                                 </Button>
 
