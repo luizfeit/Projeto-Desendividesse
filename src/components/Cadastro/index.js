@@ -93,7 +93,8 @@ export function Cadastro({ navigation }) {
                                 </Button>
 
                                 <Button mode="outlined"
-                                    style={styles.cardRegister}>
+                                    style={styles.cardRegister}
+                                    onPress={() => navigation.navigate("Login")}>
                                     Cancelar
                                 </Button>
 
