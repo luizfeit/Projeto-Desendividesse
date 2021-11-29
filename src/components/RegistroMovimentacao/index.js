@@ -19,7 +19,7 @@ import Movimentacoes from '../../services/database/Movimentacoes';
 export function RegistroMovimentacao({ route, navigation }) {
 
     const { UserId, OtherParam } = route.params;
-    const [valor, setValor] = useState(null)
+    const [valor, setValor] = useState(null);
     const [tipo, setTipo] = useState("credito");
     const [tag, setTag] = useState(null)
     const [descricao, setDescricao] = useState(null)
@@ -119,7 +119,8 @@ export function RegistroMovimentacao({ route, navigation }) {
                                 </Button>
 
                                 <Button mode="outlined"
-                                    style={styles.cardRegister}>
+                                    style={styles.cardRegister}
+                                    onPress={() => navigation.navigate('Inicial', {UserId: UserId, OtherParam: OtherParam})}>
                                     Cancelar
                                 </Button>
 

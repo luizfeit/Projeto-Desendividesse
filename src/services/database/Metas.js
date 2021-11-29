@@ -27,8 +27,8 @@ db.transaction((tx) =>{
        db.transaction((tx) => {
          //comando SQL modificável
          tx.executeSql(
-           "INSERT INTO metas (data, valor, descricao, id_user) values (?, ?, ?, ?);",
-           [obj.nome, obj.email, obj.senha, obj.id_user],
+           "INSERT INTO metas (titulo, data, valor, descricao, id_user) values (?, ?, ?, ?, ?);",
+           [obj.titulo, obj.data, obj.valor, obj.descricao, obj.id_user],
            //-----------------------
            (_, { rowsAffected, insertId }) => {
              if (rowsAffected > 0) resolve(insertId);

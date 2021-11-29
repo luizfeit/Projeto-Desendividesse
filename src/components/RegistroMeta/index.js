@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Metas from '../../services/database/Metas';
 
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Alert } from 'react-native';
 
 import { styles, theme } from './styles';
 
@@ -19,8 +19,7 @@ import { Header } from '../Header/header.component';
 
 export function RegistroMeta({ route, navigation }) {
 
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [mode, setMode] = useState('date');
+    const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
 
     const onChange = (event, selectedDate) => {
@@ -28,18 +27,9 @@ export function RegistroMeta({ route, navigation }) {
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
       };
-
-      const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-      };
     
       const showDatepicker = () => {
-        showMode('date');
-      };
-    
-      const showTimepicker = () => {
-        showMode('time');
+        setShow(true);
       };
 
     const [titulo, setTitulo] = useState(null);
@@ -49,10 +39,11 @@ export function RegistroMeta({ route, navigation }) {
     const { UserId, OtherParam } = route.params;
     // const id_user = (user.id);
 
-    const RegistraMeta = () => {
+    const RegistraMeta = (titulo, data, valor, descricao, id_user) => {
+        id_user = UserId;
         Metas.create({ titulo, data, valor, descricao, id_user })
-            .then(id_meta => console.log('Meta registrada com id=' + id_meta))
-            .catch(err => console.log(err))
+            .then(() => Alert.alert("Meta registrada com Sucesso!"))
+            .catch(err => alert(err))
     }
 
     return (
@@ -78,20 +69,24 @@ export function RegistroMeta({ route, navigation }) {
                                     value={valor}
                                     onChangeText={valor => setValor(valor || null)} />
 
-<Button onPress={showDatepicker} title="Show date picker!" />
-
-<Button onPress={showTimepicker} title="Show time picker!" />
+                                <Button 
+                                mode="outlined"
+                                style={styles.a}
+                                onPress={showDatepicker} >
+                                   Selecione a Data:
+                                </Button>
                                 
                                 {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      )}
+                                    <DateTimePicker
+                                    testID="dateTimePicker"
+                                    format= "DD/MM/YYYY"
+                                    value={date}
+                                    minimumDate={new Date()}
+                                    mode={'date'}
+                                    display="default"
+                                    onChange={onChange}
+                                    />
+                                )}
 
                                 <TextInput label="Descrição"
                                     style={styles.cardInput}
@@ -105,7 +100,8 @@ export function RegistroMeta({ route, navigation }) {
                                 </Button>
 
                                 <Button mode="outlined"
-                                    style={styles.a}>
+                                    style={styles.a}
+                                    onPress={() => navigation.navigate('Inicial', {UserId: UserId, OtherParam: OtherParam})}>
                                     Cancelar
                                 </Button>
 

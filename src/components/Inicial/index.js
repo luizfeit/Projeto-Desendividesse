@@ -25,14 +25,14 @@ export function Inicial({ route, navigation }) {
                 <View style={styles.container}>
                     <View>
                         <Card style={styles.borderCard}>
-                            <Text>UserId: {JSON.stringify(UserId)}</Text>
-                            <Text>OtherParam: {JSON.stringify(OtherParam)}</Text>
+                            <Text>UserId: {UserId}</Text>
+                            <Text>OtherParam: {OtherParam}</Text>
                             <Button mode='contained' style={styles.cardLogin}
-                            onPress={() => navigation.navigate('RegistroMovimentacao', {UserId: JSON.stringify(UserId), OtherParam: JSON.stringify(OtherParam)})}>
+                            onPress={() => navigation.navigate('RegistroMovimentacao', {UserId: UserId, OtherParam: OtherParam})}>
                                 Registrar Movimentação
                             </Button>
                             <Button mode='contained' style={styles.cardLogin}
-                            onPress={() => navigation.navigate('RegistroMeta', {UserId: JSON.stringify(UserId), OtherParam: JSON.stringify(OtherParam)})}>
+                            onPress={() => navigation.navigate('RegistroMeta', {UserId: UserId, OtherParam: OtherParam})}>
                                 Registrar Meta
                             </Button>
                         </Card>
