@@ -17,21 +17,19 @@ import { Header } from '../Header/header.component';
 import Movimentacoes from '../../services/database/Movimentacoes';
 
 export function RegistroMovimentacao({ route, navigation }) {
-    const { UserId } = route.params
+
+    const { UserId, OtherParam } = route.params;
     const [valor, setValor] = useState(null)
     const [tipo, setTipo] = useState("credito");
     const [tag, setTag] = useState(null)
     const [descricao, setDescricao] = useState(null)
 
-export function RegistroMovimentacao({ route, navigation }) {
-
-    console.log(tipo)
-
-    const { UserId, OtherParam } = route.params;
-    const RegistrarMovimentacao = () => {
-        Movimentacoes.create({ valor, tipo, tag, descricao, UserId} )
+    
+    const RegistrarMovimentacao = (valor, tipo, tag, descricao, id_user) => {
+        id_user = UserId;
+        Movimentacoes.create({ valor, tipo, tag, descricao, id_user} )
             .then(() => Alert.alert("Movimentação registrada com Sucesso"))
-            .catch(err => console.log(err))
+            .catch(err => alert(err))
     }
 
     return (
@@ -42,6 +40,7 @@ export function RegistroMovimentacao({ route, navigation }) {
                         <Card style={styles.borderCard}>
                             <Card.Title title="Nova Movimentação" />
                             <Card.Content>
+
                             <Text>UserId: {UserId}</Text>
                             <Text>OtherParam: {OtherParam}</Text>
 
@@ -50,7 +49,6 @@ export function RegistroMovimentacao({ route, navigation }) {
                                     value={valor}
                                     style={styles.cardInput}
                                     onChangeText={valor => setValor(valor || null)} />
-
 
 
                                 <RadioButton.Group
@@ -116,7 +114,7 @@ export function RegistroMovimentacao({ route, navigation }) {
 
                                 <Button mode="contained"
                                     style={styles.cardRegister}
-                                    onPress={() => RegistrarMovimentacao(valor, tipo, tag, descricao,UserId)}>
+                                    onPress={() => RegistrarMovimentacao(valor, tipo, tag, descricao, UserId)}>
                                     Salvar
                                 </Button>
 
@@ -133,4 +131,3 @@ export function RegistroMovimentacao({ route, navigation }) {
         </PaperProvider >
     );
     }
-}
