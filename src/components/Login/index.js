@@ -18,7 +18,7 @@ export function Login({ navigation }) {
 
     const ValidarLogin = (email, senha) => {
         Usuarios.findUser(email, senha)
-            .then((user) => navigation.navigate('Inicial', { UserId: user.id_usuario, OtherParam: user.email, TestParam: user.senha }))
+            .then((user) => navigation.navigate('RegistroMovimentacao', { UserId: user.id_usuario, OtherParam: user.email, TestParam: user.senha }))
             .catch(err => alert(err))
     }
     const printUser = (user) => {

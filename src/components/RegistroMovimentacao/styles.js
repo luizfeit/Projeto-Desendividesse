@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { DefaultTheme } from "react-native-paper";
 
 export const styles = StyleSheet.create({
@@ -23,13 +23,33 @@ export const styles = StyleSheet.create({
         borderColor: '#000',
     },
     cardInput: {
-        margin: 9,
         marginLeft: 0,
         marginRight: 0,
     },
     borderCard: {
         borderRadius: 10,
     },
+    radioStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+        textAlign: 'center',
+        height: Dimensions.get('window').width / 2,
+        width: Dimensions.get("window").width / 2,
+        textAlign: 'center',
+    },
+    tipo: {
+        marginTop: 6,
+        fontSize: 20
+    },
+    chip: {
+        margin: 6,
+        padding: 6,
+        width: "100%",
+    
+    }
 
 });
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Alert } from 'react-native';
 
 import { styles, theme } from './styles';
 
@@ -14,11 +14,23 @@ import {
 } from "react-native-paper";
 
 import { Header } from '../Header/header.component';
+import Movimentacoes from '../../services/database/Movimentacoes';
 
-export function RegistroMovimentacao() {
+export function RegistroMovimentacao({ route, navigation }) {
+    const { UserId } = route.params
+    const [valor, setValor] = useState(null)
+    const [tipo, setTipo] = useState("credito");
+    const [tag, setTag] = useState(null)
+    const [descricao, setDescricao] = useState(null)
 
-    const [tipo, setTipo] = useState("1");
+
     console.log(tipo)
+
+    const RegitrarMovimentacao = () => {
+        Movimentacoes.create({ valor, tipo, tag, descricao, UserId} )
+            .then(() => Alert.alert("Movimentação registrada com Sucesso"))
+            .catch(err => console.log(err))
+    }
 
     return (
         <PaperProvider theme={theme}>
@@ -31,51 +43,80 @@ export function RegistroMovimentacao() {
 
                                 <TextInput label="Valor"
                                     keyboardType="numeric"
-                                    style={styles.cardInput} />
+                                    value={valor}
+                                    style={styles.cardInput}
+                                    onChangeText={valor => setValor(valor || null)} />
+
+
 
                                 <RadioButton.Group
-                                    onValueChange={setTipo}
+                                    onValueChange={novoValor => setTipo(novoValor)}
                                     value={tipo}>
 
-                                    <View>
-                                        <Text>Crédito</Text>
-                                        <RadioButton value="1" />
-                                    </View>
+                                    <Text style={styles.tipo}>Tipo</Text>
+                                    <View style={styles.radioStyle}>
+                                        <View>
+                                            <Text>Crédito</Text>
+                                            <RadioButton value="credito" />
+                                        </View>
 
-                                    <View>
-                                        <Text>Débito</Text>
-                                        <RadioButton value="2" />
-                                    </View>
+                                        <View>
+                                            <Text>Débito</Text>
+                                            <RadioButton value="debito" />
+                                        </View>
 
-                                    <View>
-                                        <Text>Transferência</Text>
-                                        <RadioButton value="3" />
-                                    </View>
+                                        <View>
+                                            <Text>Transferência</Text>
+                                            <RadioButton value="transferencia" />
+                                        </View>
 
-                                    <View>
-                                        <Text>Saque</Text>
-                                        <RadioButton value="4" />
+                                        <View>
+                                            <Text>Saque</Text>
+                                            <RadioButton value="saque" />
+                                        </View>
+                                    </View>
+                                </RadioButton.Group>
+
+
+                                <RadioButton.Group onValueChange={novaTag => setTag(novaTag)}
+                                    value={tag}>
+                                    <Text style={styles.tipo}>Tag</Text>
+                                    <View style={styles.radioStyle}>
+                                        <View>
+                                            <Text>Lazer</Text>
+                                            <RadioButton value="lazer" />
+                                        </View>
+
+                                        <View>
+                                            <Text>Alimentação</Text>
+                                            <RadioButton value="alimetacao" />
+                                        </View>
+
+                                        <View>
+                                            <Text>Transporte</Text>
+                                            <RadioButton value="transporte" />
+                                        </View>
+
+                                        <View>
+                                            <Text>Mercado</Text>
+                                            <RadioButton value="mercado" />
+                                        </View>
                                     </View>
 
                                 </RadioButton.Group>
 
-                                <TextInput label="Tag"
-                                    style={styles.cardInput}
-                                    disabled />
-                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed')}>Example Chip</Chip>
-                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed1')}>Example 1</Chip>
-                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed2')}>Example 2</Chip>
-                                    <Chip icon="info" mode="outlined" onPress={() => console.log('Pressed3')}>Example 3</Chip>
-
                                 <TextInput label="Descrição"
-                                    style={styles.cardInput} />
+                                    style={styles.cardInput}
+                                    value={descricao}
+                                    onChangeText={(descricao) => setDescricao(descricao)} />
 
                                 <Button mode="contained"
-                                    style={styles.cardRegister}>
+                                    style={styles.cardRegister}
+                                    onPress={() => RegitrarMovimentacao(valor, tipo, tag, descricao,UserId)}>
                                     Salvar
                                 </Button>
 
-                                <Button mode="contained"
+                                <Button mode="outlined"
                                     style={styles.cardRegister}>
                                     Cancelar
                                 </Button>
@@ -85,6 +126,6 @@ export function RegistroMovimentacao() {
                     </View>
                 </View>
             </ScrollView>
-        </PaperProvider>
+        </PaperProvider >
     );
 }
