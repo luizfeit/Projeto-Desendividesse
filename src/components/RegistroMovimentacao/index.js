@@ -15,10 +15,12 @@ import {
 
 import { Header } from '../Header/header.component';
 
-export function RegistroMovimentacao() {
+export function RegistroMovimentacao({ route, navigation }) {
 
     const [tipo, setTipo] = useState("1");
     console.log(tipo)
+
+    const { UserId, OtherParam } = route.params;
 
     return (
         <PaperProvider theme={theme}>
@@ -28,6 +30,8 @@ export function RegistroMovimentacao() {
                         <Card style={styles.borderCard}>
                             <Card.Title title="Nova Movimentação" />
                             <Card.Content>
+                            <Text>UserId: {UserId}</Text>
+                            <Text>OtherParam: {OtherParam}</Text>
 
                                 <TextInput label="Valor"
                                     keyboardType="numeric"

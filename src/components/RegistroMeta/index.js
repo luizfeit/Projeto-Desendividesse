@@ -17,13 +17,15 @@ import {
 
 import { Header } from '../Header/header.component';
 
-export function RegistroMeta() {
+export function RegistroMeta({ route, navigation }) {
 
     const [date, setDate] = useState(new Date());
 
     const [titulo, setTitulo] = useState(null);
     const [valor, setValor] = useState(null);
     const [descricao, setDescricao] = useState(null);
+
+    const { UserId, OtherParam } = route.params;
     // const id_user = (user.id);
 
     const RegistraMeta = () => {
@@ -41,6 +43,8 @@ export function RegistroMeta() {
                         <Card style={styles.borderCard}>
                             <Card.Title title="Nova Meta" />
                             <Card.Content>
+                            <Text>UserId: {UserId}</Text>
+                            <Text>OtherParam: {OtherParam}</Text>
 
                                 <TextInput label="Título"
                                     style={styles.cardInput}
@@ -52,10 +56,10 @@ export function RegistroMeta() {
                                     style={styles.cardInput}
                                     value={valor}
                                     onChangeText={valor => setValor(valor || null)} />
-                                {/* 
+                                
                                 <DatePicker date={date} onDateChange={setDate}
-                            //label="Selecione a Data Final" 
-                           >; */}
+                                label="Selecione a Data Final" 
+                                />;
 
                                 <TextInput label="Descrição"
                                     style={styles.cardInput}
@@ -64,7 +68,7 @@ export function RegistroMeta() {
 
                                 <Button mode="contained"
                                     style={styles.cardRegister}
-                                    onPress={() => RegistraMeta(titulo, data, valor, descricao, id_user)}>
+                                    onPress={() => RegistraMeta(titulo, date, valor, descricao, UserId)}>
                                     Salvar
                                 </Button>
 

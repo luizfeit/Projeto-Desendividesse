@@ -18,17 +18,14 @@ export function Login({ navigation }) {
 
     const ValidarLogin = (email, senha) => {
         Usuarios.findUser(email, senha)
-            .then((user) => navigation.navigate('Inicial', { UserId: user.id_usuario, OtherParam: user.email, TestParam: user.senha }))
-            .catch(err => alert(err))
+            .then((user) => navigation.navigate('Inicial', 
+            { UserId: user.id_usuario, OtherParam: user.email}))
+            .catch(err => {
+                return alert(err);
+            }, setSenha(null))
     }
     const printUser = (user) => {
         console.log(`id_usuario:${user.id_usuario}, nome:${user.nome}, email:${user.email}, senha:${user.senha}`)
-    }
-
-    const findIDUsuario = (email, senha) => {
-        Usuarios.find(email, senha)
-            .then(id_usuario => console.log(`O id do usuarios logado é ${id_usuario}`))
-            .catch(err => alert(err))
     }
 
     return (

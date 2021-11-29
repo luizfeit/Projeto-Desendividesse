@@ -17,7 +17,7 @@ import { Header } from '../Header/header.component';
 
 export function Inicial({ route, navigation }) {
 
-    const { UserId, OtherParam, TestParam } = route.params;
+    const { UserId, OtherParam } = route.params;
 
     return (
         <PaperProvider theme={theme}>
@@ -27,7 +27,14 @@ export function Inicial({ route, navigation }) {
                         <Card style={styles.borderCard}>
                             <Text>UserId: {JSON.stringify(UserId)}</Text>
                             <Text>OtherParam: {JSON.stringify(OtherParam)}</Text>
-                            <Text>TestParam: {JSON.stringify(TestParam)}</Text>
+                            <Button mode='contained' style={styles.cardLogin}
+                            onPress={() => navigation.navigate('RegistroMovimentacao', {UserId: JSON.stringify(UserId), OtherParam: JSON.stringify(OtherParam)})}>
+                                Registrar Movimentação
+                            </Button>
+                            <Button mode='contained' style={styles.cardLogin}
+                            onPress={() => navigation.navigate('RegistroMeta', {UserId: JSON.stringify(UserId), OtherParam: JSON.stringify(OtherParam)})}>
+                                Registrar Meta
+                            </Button>
                         </Card>
                     </View>
                 </View>
