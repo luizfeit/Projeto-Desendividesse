@@ -6,7 +6,7 @@ import { ScrollView, View, Text } from 'react-native';
 
 import { styles, theme } from './styles';
 
-import DatePicker from 'react-native-date-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {
     Button,
@@ -19,7 +19,28 @@ import { Header } from '../Header/header.component';
 
 export function RegistroMeta({ route, navigation }) {
 
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+      };
+
+      const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+      };
+    
+      const showDatepicker = () => {
+        showMode('date');
+      };
+    
+      const showTimepicker = () => {
+        showMode('time');
+      };
 
     const [titulo, setTitulo] = useState(null);
     const [valor, setValor] = useState(null);
@@ -56,10 +77,21 @@ export function RegistroMeta({ route, navigation }) {
                                     style={styles.cardInput}
                                     value={valor}
                                     onChangeText={valor => setValor(valor || null)} />
+
+<Button onPress={showDatepicker} title="Show date picker!" />
+
+<Button onPress={showTimepicker} title="Show time picker!" />
                                 
-                                <DatePicker date={date} onDateChange={setDate}
-                                label="Selecione a Data Final" 
-                                />;
+                                {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
 
                                 <TextInput label="Descrição"
                                     style={styles.cardInput}
