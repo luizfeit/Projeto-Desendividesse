@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { ScrollView, View, Text, Alert } from 'react-native';
+import { ScrollView, View, Text, Alert, Dimensions } from 'react-native';
 
 import { styles, theme } from './styles';
 
@@ -17,7 +17,18 @@ import {
 
 import Movimentacao from '../../services/database/Movimentacoes';
 
-import { Header } from '../Header/header.component';
+import { data, screenWidth, chartConfig } from './GraficoTag'
+import { data1, screenWidth1, chartConfig1 } from './GraficoGasto'
+
+import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+} from "react-native-chart-kit";
+
 
 export function Inicial({ route, navigation }) {
 
@@ -25,10 +36,12 @@ export function Inicial({ route, navigation }) {
     const [salMov, setSalMov] = useState(null);
 
     useEffect(() => {
-        Movimentacao.saldo(UserId)
-            .then((valor) => valor['SUM(valor)'])
+        Movimentacao.saldo({ UserId })
+            .then(() => setSalMov['SUM(valor)'])
             .catch(err => alert(err))
     });
+
+
 
     return (
         <PaperProvider theme={theme}>
@@ -43,7 +56,9 @@ export function Inicial({ route, navigation }) {
 
 
                             <Card.Content>
-                                <Title style={styles.saldo}>Saldo de Gastos: {salMov}</Title>
+                                <Title style={styles.saldo}>Saldo de Gastos: {salMov || parseFloat(0.00)}</Title>
+
+
 
                                 <Button mode='contained' style={styles.cardLogin}
                                     onPress={() => navigation.navigate('RegistroMovimentacao', { UserId: UserId, OtherParam: OtherParam })}>
@@ -55,6 +70,31 @@ export function Inicial({ route, navigation }) {
                                     Registrar Meta
                                 </Button>
                             </Card.Content>
+
+                            <Text style={styles.tipo}>Gráfico de Tags</Text>
+                            <View>
+                                <ProgressChart
+                                    width={screenWidth}
+                                    data={data}
+                                    height={200}
+                                    strokeWidth={16}
+                                    radius={32}
+                                    chartConfig={chartConfig}
+                                    hideLegend={false} />
+                            </View>
+
+                            <Text style={styles.tipo}>Gráfico de Gastos</Text>
+
+                            <BarChart
+                                data={data1}
+                                style={styles.chart}
+                                width={screenWidth1}
+                                height={300}
+                                yAxisLabel="R$"
+                                chartConfig={chartConfig1}
+                                verticalLabelRotation={27}
+                            />
+
                         </Card>
                     </View>
                 </View>
