@@ -19,18 +19,18 @@ import { Header } from '../Header/header.component';
 
 export function RegistroMeta({ route, navigation }) {
 
-    const [date, setDate] = useState(new Date());
+    const [data, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
 
     const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
+        const currentDate = selectedDate || data
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
-      };
-    
-      const showDatepicker = () => {
+    };
+
+    const showDatepicker = () => {
         setShow(true);
-      };
+    };
 
     const [titulo, setTitulo] = useState(null);
     const [valor, setValor] = useState(null);
@@ -39,16 +39,16 @@ export function RegistroMeta({ route, navigation }) {
     const { UserId, OtherParam } = route.params;
     // const id_user = (user.id);
 
-    const RegistraMeta = (titulo, data, valor, descricao, id_user) => {
+    const RegistrarMeta = (titulo, data, valor, descricao, id_user) => {
         id_user = UserId;
         data = date;
         Metas.create({ titulo, data, valor, descricao, id_user })
-            .then(() => Alert.alert("Meta registrada com Sucesso!"))
+            .then(() => console.log("Meta Criado com Sucesso"))
             .catch(err => alert(err))
     }
 
     return (
-        
+
         <PaperProvider theme={theme}>
             <ScrollView style={styles.background}>
                 <View style={styles.container}>
@@ -56,8 +56,8 @@ export function RegistroMeta({ route, navigation }) {
                         <Card style={styles.borderCard}>
                             <Card.Title title="Nova Meta" />
                             <Card.Content>
-                            <Text>UserId: {UserId}</Text>
-                            <Text>OtherParam: {OtherParam}</Text>
+                                <Text>UserId: {UserId}</Text>
+                                <Text>OtherParam: {OtherParam}</Text>
 
                                 <TextInput label="Título"
                                     style={styles.cardInput}
@@ -70,23 +70,24 @@ export function RegistroMeta({ route, navigation }) {
                                     value={valor}
                                     onChangeText={valor => setValor(valor || null)} />
 
-                                <Button 
-                                mode="outlined"
-                                style={styles.a}
-                                onPress={showDatepicker} >
-                                   Selecione a Data:
+                                <Button
+                                    mode="outlined"
+                                    style={styles.a}
+                                    onPress={showDatepicker} >
+                                    Selecione a Data:
                                 </Button>
-                                
+
                                 {show && (
                                     <DateTimePicker
-                                    testID="dateTimePicker"
-                                    value={date}
-                                    minimumDate={new Date()}
-                                    mode={'date'}
-                                    // display="default"
-                                    onChange={onChange}
+                                        testID="dateTimePicker"
+                                        value={data}
+                                        minimumDate={new Date()}
+                                        mode={'date'}
+                                        onChange={onChange}
                                     />
                                 )}
+
+                                <Text>{data.getDate()}/{data.getMonth() + 1}/{data.getFullYear()}</Text>
 
                                 <TextInput label="Descrição"
                                     style={styles.cardInput}
@@ -95,13 +96,16 @@ export function RegistroMeta({ route, navigation }) {
 
                                 <Button mode="contained"
                                     style={styles.cardRegister}
-                                    onPress={() => RegistraMeta(titulo, date, valor, descricao, UserId)}>
+                                    onPress={() => {
+                                        RegistrarMeta(titulo, data.toLocaleDateString(), valor, descricao, UserId)
+                                        console.log(titulo,  data.toLocaleDateString(), valor, descricao, UserId)
+                                    }}>
                                     Salvar
                                 </Button>
 
                                 <Button mode="outlined"
-                                    style={styles.a}
-                                    onPress={() => navigation.navigate('Inicial', {UserId: UserId, OtherParam: OtherParam})}>
+                                    style={styles.cardRegister}
+                                    onPress={() => navigation.navigate('Inicial', { UserId: UserId, OtherParam: OtherParam })}>
                                     Cancelar
                                 </Button>
 
