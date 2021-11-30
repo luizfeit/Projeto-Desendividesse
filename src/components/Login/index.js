@@ -19,7 +19,7 @@ export function Login({ navigation }) {
     const ValidarLogin = (email, senha) => {
         Usuarios.findUser(email, senha)
             .then((user) => navigation.navigate('Inicial', 
-            { UserId: user.id_usuario, OtherParam: user.email}))
+            { UserId: user.id_usuario, OtherParam: user.nome}))
             .catch(err => {
                 return alert(err);
             }, setSenha(null))

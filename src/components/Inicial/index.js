@@ -1,23 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, Alert } from 'react-native';
 
 import { styles, theme } from './styles';
 
 import {
     Button,
     Card,
+    Title,
     Chip,
     Provider as PaperProvider,
     RadioButton,
     TextInput
 } from "react-native-paper";
 
+import Movimentacao from '../../services/database/Movimentacoes';
+
 import { Header } from '../Header/header.component';
 
 export function Inicial({ route, navigation }) {
 
     const { UserId, OtherParam } = route.params;
+    const {saldo, setSaldo} = useState(null);
+
+    useEffect(() => {
+        Movimentacao.saldo(id)
+        .then((valor) => setSaldo(valor))
+        .catch(err => alert(err)) 
+      });
 
     return (
         <PaperProvider theme={theme}>
@@ -25,8 +35,15 @@ export function Inicial({ route, navigation }) {
                 <View style={styles.container}>
                     <View>
                         <Card style={styles.borderCard}>
-                            <Text>UserId: {UserId}</Text>
-                            <Text>OtherParam: {OtherParam}</Text>
+                            <Card.Title
+                            title={'Olá ' + OtherParam}
+                            titleStyle={styles.cardTitle}
+                            />
+
+                            <Card.Content>
+                             <Title>Saldo de Gastos: {saldo}</Title>   
+                            </Card.Content>
+
                             <Button mode='contained' style={styles.cardLogin}
                             onPress={() => navigation.navigate('RegistroMovimentacao', {UserId: UserId, OtherParam: OtherParam})}>
                                 Registrar Movimentação

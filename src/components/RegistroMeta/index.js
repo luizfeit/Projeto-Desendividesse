@@ -41,6 +41,7 @@ export function RegistroMeta({ route, navigation }) {
 
     const RegistraMeta = (titulo, data, valor, descricao, id_user) => {
         id_user = UserId;
+        data = date;
         Metas.create({ titulo, data, valor, descricao, id_user })
             .then(() => Alert.alert("Meta registrada com Sucesso!"))
             .catch(err => alert(err))
@@ -79,11 +80,10 @@ export function RegistroMeta({ route, navigation }) {
                                 {show && (
                                     <DateTimePicker
                                     testID="dateTimePicker"
-                                    format= "DD/MM/YYYY"
                                     value={date}
                                     minimumDate={new Date()}
                                     mode={'date'}
-                                    display="default"
+                                    // display="default"
                                     onChange={onChange}
                                     />
                                 )}

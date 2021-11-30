@@ -29,7 +29,7 @@ export function RegistroMovimentacao({ route, navigation }) {
         id_user = UserId;
         Movimentacoes.create({ valor, tipo, tag, descricao, id_user} )
             .then(() => Alert.alert("Movimentação registrada com Sucesso"))
-            .catch(err => alert(err))
+            .catch(err => alert(err)) 
     }
 
     return (

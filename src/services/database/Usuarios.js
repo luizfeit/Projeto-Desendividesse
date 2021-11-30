@@ -172,7 +172,7 @@ export default {
   find,
   findUser,
   all,
-  remove,
+  remove
 };
 
 
