@@ -51,10 +51,18 @@ export const styles = StyleSheet.create({
     userName: {
         flex: 1,
         alignItems: "flex-start",
-        alignContent:"flex-start",
-        textAlign:"center"
+        alignContent: "flex-start",
+        textAlign: "center"
     },
     saldo: {
+        marginBottom: 40
+    }, 
+    tipo: {
+        marginTop: 15,
+        marginBottom:10,
+        fontSize: 20
+    },
+    chart:{
         marginBottom: 40
     }
 })
