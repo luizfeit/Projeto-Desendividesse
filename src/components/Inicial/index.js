@@ -20,7 +20,7 @@ import {
 import Movimentacao from '../../services/database/Movimentacoes';
 
 import { data, screenWidth, chartConfig } from './GraficoTag'
-import { data1, screenWidth1, chartConfig1 } from './GraficoGasto'
+import { screenWidth1, chartConfig1 } from './GraficoGasto'
 
 import {
     LineChart,
@@ -42,18 +42,43 @@ export function Inicial({ route, navigation }) {
         setSalMov(valor);
     }
 
+    const printTipo = (tipos) => {
+
+    }
+
+    const printTag = (tags) => {
+        data.data.forEach[tags['SUM(valor)']]
+    }
+
     useFocusEffect(
         React.useCallback(() => {
             Movimentacao.saldo(UserId)
             .then((valor) => printSaldo(valor['SUM(valor)']))
             .catch(err => alert(err))
-        }
-    ));
+            Movimentacao.countTipo(UserId)
+                .then((tipos) => console.log(tipos))
+                .catch(err => alert(err))
+            Movimentacao.countTag(UserId)
+                .then((tags) => console.log(tags))
+                .catch(err => alert(err))
+        })
+    );
+
+    const data1 = {
+                labels: ["Crédito","Débito","Saque", "Transferencia" ],
+                datasets: [
+                {
+                    data: []
+                }
+                ]
+            }
     
+
+      const data = {
+        labels: ["Lazer", "Alime.", "Trans.", "Mer."], // optional
+        data: [0.4, 0.6, 0.8, 0.1]
+    };
     
-
-
-
     return (
         <PaperProvider theme={theme}>
             <ScrollView style={styles.background}>

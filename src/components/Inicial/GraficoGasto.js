@@ -1,13 +1,6 @@
 import { Dimensions } from "react-native";
 
-const data1 = {
-    labels: ["Débito", "Crédito", "Trânsferencia", "Saque"],
-    datasets: [
-      {
-        data: [1,2,3,4]
-      }
-    ]
-  };
+
 const screenWidth1 = Dimensions.get("window").width;
 
 const chartConfig1 = {
@@ -20,7 +13,6 @@ const chartConfig1 = {
 };
 
 export {
-    data1,
     screenWidth1,
     chartConfig1
 }

@@ -114,6 +114,56 @@ db.transaction((tx) =>{
     });
   });
 };
+
+   /**
+ * BUSCA SALDO TOTAL DO USUARIO
+ * - Recebe o ID do usuario;
+ * - Retorna uma Promise:
+ *  - O resultado da Promise é o objeto (caso exista);
+ *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL.
+ */
+    const countTag = (id) => {
+      return new Promise((resolve, reject) => { 
+        db.transaction((tx) => { 
+          //comando SQL modificável
+          tx.executeSql(
+            "SELECT m.tag, SUM(m.valor) FROM movimentacoes m WHERE id_user = ? GROUP BY m.tag", 
+            [id],
+            //-----------------------
+            (_, { rows }) => {
+              if (rows.length > 0) resolve(rows._array);
+              else reject("Obj not found: id=" + id); // nenhum registro encontrado
+            },
+            (_, error) => reject(error) // erro interno em tx.executeSql
+          );
+        });
+      });
+    };
+
+       /**
+ * BUSCA SALDO TOTAL DO USUARIO
+ * - Recebe o ID do usuario;
+ * - Retorna uma Promise:
+ *  - O resultado da Promise é o objeto (caso exista);
+ *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL.
+ */
+ const countTipo = (id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      //comando SQL modificável
+      tx.executeSql(
+        "SELECT m.tipo, SUM(m.valor) FROM movimentacoes m WHERE id_user = ? GROUP BY m.tipo",
+        [id],
+        //-----------------------
+        (_, { rows }) => {
+          if (rows.length > 0) resolve(rows._array);
+          else reject("Obj not found: id=" + id); // nenhum registro encontrado
+        },
+        (_, error) => reject(error) // erro interno em tx.executeSql
+      );
+    });
+  });
+};
    
    /**
     * BUSCA TODOS OS REGISTROS DE UMA DETERMINADA TABELA
@@ -168,7 +218,9 @@ db.transaction((tx) =>{
      find,
      all,
      remove,
-     saldo
+     saldo,
+     countTag,
+     countTipo
    };
 
 
