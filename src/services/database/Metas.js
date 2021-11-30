@@ -6,7 +6,7 @@ import  db  from "./SqLiteDataBase";
 */
 db.transaction((tx) =>{
     //<<<<<<SOMENTE PARA TESTES>>>>>>
-    // tx.executeSql("DROP TABLE usuarios;");
+    //tx.executeSql("DROP TABLE metas;");
     //<<<<<<SOMENTE PARA TESTES>>>>>>
 
     tx.executeSql(
