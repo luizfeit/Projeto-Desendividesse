@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ScrollView, View, Text, Alert } from 'react-native';
 
@@ -11,7 +11,8 @@ import {
     Chip,
     Provider as PaperProvider,
     RadioButton,
-    TextInput
+    TextInput,
+    Avatar
 } from "react-native-paper";
 
 import Movimentacao from '../../services/database/Movimentacoes';
@@ -21,13 +22,13 @@ import { Header } from '../Header/header.component';
 export function Inicial({ route, navigation }) {
 
     const { UserId, OtherParam } = route.params;
-    const {saldo, setSaldo} = useState(null);
+    const [salMov, setSalMov] = useState(null);
 
     useEffect(() => {
         Movimentacao.saldo(UserId)
-        .then((valor) => valor['SUM(valor)']) 
-        .catch(err => alert(err))
-      });
+            .then((valor) => valor['SUM(valor)'])
+            .catch(err => alert(err))
+    });
 
     return (
         <PaperProvider theme={theme}>
@@ -35,23 +36,25 @@ export function Inicial({ route, navigation }) {
                 <View style={styles.container}>
                     <View>
                         <Card style={styles.borderCard}>
+
                             <Card.Title
-                            title={'Olá ' + OtherParam}
-                            titleStyle={styles.cardTitle}
-                            />
+                                title={`Bem vindo ${OtherParam}`}
+                                titleStyle={[styles.cardTitle, styles.userName]} />
+
 
                             <Card.Content>
-                             <Title>Saldo de Gastos: {saldo}</Title>   
-                            </Card.Content>
+                                <Title style={styles.saldo}>Saldo de Gastos: {salMov}</Title>
 
-                            <Button mode='contained' style={styles.cardLogin}
-                            onPress={() => navigation.navigate('RegistroMovimentacao', {UserId: UserId, OtherParam: OtherParam})}>
-                                Registrar Movimentação
-                            </Button>
-                            <Button mode='contained' style={styles.cardLogin}
-                            onPress={() => navigation.navigate('RegistroMeta', {UserId: UserId, OtherParam: OtherParam})}>
-                                Registrar Meta
-                            </Button>
+                                <Button mode='contained' style={styles.cardLogin}
+                                    onPress={() => navigation.navigate('RegistroMovimentacao', { UserId: UserId, OtherParam: OtherParam })}>
+                                    Registrar Movimentação
+                                </Button>
+
+                                <Button mode='contained' style={styles.cardLogin}
+                                    onPress={() => navigation.navigate('RegistroMeta', { UserId: UserId, OtherParam: OtherParam })}>
+                                    Registrar Meta
+                                </Button>
+                            </Card.Content>
                         </Card>
                     </View>
                 </View>

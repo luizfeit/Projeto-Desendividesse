@@ -21,7 +21,7 @@ export function RegistroMovimentacao({ route, navigation }) {
     const { UserId, OtherParam } = route.params;
     const [valor, setValor] = useState(null);
     const [tipo, setTipo] = useState("credito");
-    const [tag, setTag] = useState(null)
+    const [tag, setTag] = useState("lazer")
     const [descricao, setDescricao] = useState(null)
 
     
@@ -32,6 +32,10 @@ export function RegistroMovimentacao({ route, navigation }) {
             .catch(err => alert(err)) 
     }
 
+    const Cancelar = () => {
+        navigation.navigate('Inicial', { UserId: UserId, OtherParam: OtherParam })
+    }
+
     return (
         <PaperProvider theme={theme}>
             <ScrollView style={styles.background}>
@@ -40,9 +44,6 @@ export function RegistroMovimentacao({ route, navigation }) {
                         <Card style={styles.borderCard}>
                             <Card.Title title="Nova Movimentação" />
                             <Card.Content>
-
-                            <Text>UserId: {UserId}</Text>
-                            <Text>OtherParam: {OtherParam}</Text>
 
                                 <TextInput label="Valor"
                                     keyboardType="numeric"
@@ -91,7 +92,7 @@ export function RegistroMovimentacao({ route, navigation }) {
 
                                         <View>
                                             <Text>Alimentação</Text>
-                                            <RadioButton value="alimentação" />
+                                            <RadioButton value="alimetacao" />
                                         </View>
 
                                         <View>
@@ -120,7 +121,7 @@ export function RegistroMovimentacao({ route, navigation }) {
 
                                 <Button mode="outlined"
                                     style={styles.cardRegister}
-                                    onPress={() => navigation.navigate('Inicial', {UserId: UserId, OtherParam: OtherParam})}>
+                                    onPress={() => Cancelar()}>
                                     Cancelar
                                 </Button>
 

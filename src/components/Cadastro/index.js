@@ -49,6 +49,10 @@ export function Cadastro({ navigation }) {
         }
     }
 
+    const Cancelar = () => {
+        navigation.navigate("Login")
+    }
+
     return (
         <PaperProvider theme={theme}>
             {/* <Header title="Cadastro" /> */}
@@ -94,7 +98,7 @@ export function Cadastro({ navigation }) {
 
                                 <Button mode="outlined"
                                     style={styles.cardRegister}
-                                    onPress={() => navigation.navigate("Login")}>
+                                    onPress={() => Cancelar()}>
                                     Cancelar
                                 </Button>
 

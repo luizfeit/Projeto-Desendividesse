@@ -38,7 +38,6 @@ export function Login({ navigation }) {
                     <Card style={styles.borderCard}>
                         <Card.Title
                             title="Login"
-
                             titleStyle={styles.cardTitle} />
 
                         <Card.Content>

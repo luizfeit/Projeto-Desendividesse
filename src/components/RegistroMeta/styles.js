@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from 'react-native';
 import { DefaultTheme } from "react-native-paper";
 
 export const styles = StyleSheet.create({
@@ -30,6 +30,24 @@ export const styles = StyleSheet.create({
     borderCard: {
         borderRadius: 10,
     },
+    calendar: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+        textAlign: 'center',
+        width: Dimensions.get("window").width / 2,
+        textAlign: 'center',
+    },
+    date: {
+        marginTop: 6,
+        fontSize: 20,
+        marginBottom: 7
+    },
+    date2: {
+        marginTop: 6,
+    }
 
 });
 

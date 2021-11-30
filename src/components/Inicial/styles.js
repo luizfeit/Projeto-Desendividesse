@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignContent: 'center',
         flexDirection: 'row',
         backgroundColor: '#78797b',
     },
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     borderCard: {
         borderRadius: 3,
         minWidth: 300,
-        minHeight: 70,
+
         marginTop: 15
     },
     cardTitle: {
@@ -43,10 +43,20 @@ export const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderRightWidth: 1,
         borderColor: '#000',
-        margin: 2,
+        margin: 4,
         marginLeft: 0,
         marginRight: 0,
+        width: 260,
     },
+    userName: {
+        flex: 1,
+        alignItems: "flex-start",
+        alignContent:"flex-start",
+        textAlign:"center"
+    },
+    saldo: {
+        marginBottom: 40
+    }
 })
 
 export const theme = {

@@ -35,7 +35,6 @@ export const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         alignContent: 'center',
-        textAlign: 'center',
         height: Dimensions.get('window').width / 2,
         width: Dimensions.get("window").width / 2,
         textAlign: 'center',
@@ -48,7 +47,7 @@ export const styles = StyleSheet.create({
         margin: 6,
         padding: 6,
         width: "100%",
-    
+
     }
 
 });

@@ -47,6 +47,10 @@ export function RegistroMeta({ route, navigation }) {
             .catch(err => alert(err))
     }
 
+    const Cancelar = () => {
+        navigation.navigate('Inicial', { UserId: UserId, OtherParam: OtherParam })
+    }
+
     return (
 
         <PaperProvider theme={theme}>
@@ -56,8 +60,6 @@ export function RegistroMeta({ route, navigation }) {
                         <Card style={styles.borderCard}>
                             <Card.Title title="Nova Meta" />
                             <Card.Content>
-                                <Text>UserId: {UserId}</Text>
-                                <Text>OtherParam: {OtherParam}</Text>
 
                                 <TextInput label="Título"
                                     style={styles.cardInput}
@@ -70,24 +72,30 @@ export function RegistroMeta({ route, navigation }) {
                                     value={valor}
                                     onChangeText={valor => setValor(valor || null)} />
 
-                                <Button
-                                    mode="outlined"
-                                    style={styles.a}
-                                    onPress={showDatepicker} >
-                                    Selecione a Data:
-                                </Button>
+                                <Text style={styles.date}> Seleciona a data: </Text>
+                                <View style={styles.calendar}>
 
-                                {show && (
-                                    <DateTimePicker
-                                        testID="dateTimePicker"
-                                        value={data}
-                                        minimumDate={new Date()}
-                                        mode={'date'}
-                                        onChange={onChange}
-                                    />
-                                )}
+                                    <Button
+                                        onPress={showDatepicker}
+                                        icon="calendar">
+                                    </Button>
+                                    {show && (
+                                        <DateTimePicker
+                                            testID="dateTimePicker"
+                                            value={data}
+                                            minimumDate={new Date()}
+                                            mode={'date'}
+                                            onChange={onChange}
+                                        />
 
-                                <Text>{data.getDate()}/{data.getMonth() + 1}/{data.getFullYear()}</Text>
+                                    )}
+                                    <Text style={styles.date2}>
+                                        {data.getDate()}/{data.getMonth() + 1}/{data.getFullYear()}
+                                    </Text>
+                                </View>
+
+
+
 
                                 <TextInput label="Descrição"
                                     style={styles.cardInput}
@@ -98,14 +106,14 @@ export function RegistroMeta({ route, navigation }) {
                                     style={styles.cardRegister}
                                     onPress={() => {
                                         RegistrarMeta(titulo, data.toLocaleDateString(), valor, descricao, UserId)
-                                        console.log(titulo,  data.toLocaleDateString(), valor, descricao, UserId)
+                                        console.log(titulo, data.toLocaleDateString(), valor, descricao, UserId)
                                     }}>
                                     Salvar
                                 </Button>
 
                                 <Button mode="outlined"
                                     style={styles.cardRegister}
-                                    onPress={() => navigation.navigate('Inicial', { UserId: UserId, OtherParam: OtherParam })}>
+                                    onPress={() => Cancelar()}>
                                     Cancelar
                                 </Button>
 
@@ -114,6 +122,6 @@ export function RegistroMeta({ route, navigation }) {
                     </View>
                 </View>
             </ScrollView>
-        </PaperProvider>
+        </PaperProvider >
     );
 }
