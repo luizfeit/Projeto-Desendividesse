@@ -4,6 +4,8 @@ import { ScrollView, View, Text, Alert } from 'react-native';
 
 import { styles, theme } from './styles';
 
+import { useFocusEffect } from '@react-navigation/native';
+
 import {
     Button,
     Card,
@@ -24,11 +26,20 @@ export function Inicial({ route, navigation }) {
     const { UserId, OtherParam } = route.params;
     const [salMov, setSalMov] = useState(null);
 
-    useEffect(() => {
-        Movimentacao.saldo(UserId)
-            .then((valor) => valor['SUM(valor)'])
+
+    const printSaldo = (valor) => {
+        setSalMov(valor);
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            Movimentacao.saldo(UserId)
+            .then((valor) => printSaldo(valor['SUM(valor)']))
             .catch(err => alert(err))
-    });
+        }
+    ));
+    
+    
 
     return (
         <PaperProvider theme={theme}>
