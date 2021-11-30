@@ -81,7 +81,7 @@ db.transaction((tx) =>{
            [id],
            //-----------------------
            (_, { rows }) => {
-             if (rows.length > 0) resolve(rows._array[0]);
+             if (rows.length > 0) resolve(rows._array);
              else reject("Obj not found: id=" + id); // nenhum registro encontrado
            },
            (_, error) => reject(error) // erro interno em tx.executeSql

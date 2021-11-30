@@ -43,7 +43,7 @@ export function RegistroMeta({ route, navigation }) {
         id_user = UserId;
         data = date;
         Metas.create({ titulo, data, valor, descricao, id_user })
-            .then(() => console.log("Meta Criado com Sucesso"))
+            .then(() => Alert.alert("Meta registrada com Sucesso!"))
             .catch(err => alert(err))
     }
 

@@ -24,9 +24,9 @@ export function Inicial({ route, navigation }) {
     const {saldo, setSaldo} = useState(null);
 
     useEffect(() => {
-        Movimentacao.saldo(id)
-        .then((valor) => setSaldo(valor))
-        .catch(err => alert(err)) 
+        Movimentacao.saldo(UserId)
+        .then((valor) => valor['SUM(valor)']) 
+        .catch(err => alert(err))
       });
 
     return (
