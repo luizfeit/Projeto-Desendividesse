@@ -7,7 +7,7 @@ import db from "./SqLiteDataBase";
 */
 db.transaction((tx) => {
   //<<<<<<SOMENTE PARA TESTES>>>>>>
-  tx.executeSql("DROP TABLE usuarios;");
+  //tx.executeSql("DROP TABLE usuarios;");
   //<<<<<<SOMENTE PARA TESTES>>>>>>
 
   tx.executeSql(
@@ -75,23 +75,6 @@ const update = (id, obj) => {
  *  - O resultado da Promise é o objeto (caso exista);
  *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL.
  */
-const find = (id) => {
-  return new Promise((resolve, reject) => {
-    db.transaction((tx) => {
-      //comando SQL modificável
-      tx.executeSql(
-        "SELECT * FROM usuarios WHERE id_usuario = ?",
-        [id],
-        //-----------------------
-        (_, { rows }) => {
-          if (rows.length > 0) resolve(rows._array[0]);
-          else reject("Obj not found: id=" + id); // nenhum registro encontrado
-        },
-        (_, error) => reject(error) // erro interno em tx.executeSql
-      );
-    });
-  });
-};
 
 /**
  * BUSCA UM REGISTRO POR MEIO DO EMAIL E SENHA
@@ -169,7 +152,6 @@ const remove = (id) => {
 export default {
   create,
   update,
-  find,
   findUser,
   all,
   remove

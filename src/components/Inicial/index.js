@@ -18,17 +18,14 @@ import {
 } from "react-native-paper";
 
 import Movimentacao from '../../services/database/Movimentacoes';
+import Metas from '../../services/database/Metas';
 
 import { data, screenWidth, chartConfig } from './GraficoTag'
 import { data1, screenWidth1, chartConfig1 } from './GraficoGasto'
 
 import {
-    LineChart,
     BarChart,
-    PieChart,
     ProgressChart,
-    ContributionGraph,
-    StackedBarChart
 } from "react-native-chart-kit";
 
 
@@ -36,64 +33,29 @@ export function Inicial({ route, navigation }) {
 
     const { UserId, OtherParam } = route.params;
     const [salMov, setSalMov] = useState(null);
+    const [meta, setMeta] = useState(null);
 
 
     const printSaldo = (valor) => {
         setSalMov(valor);
     }
 
-    // function printTipo (tipos) {
-    //     tipos.push(tipos[0]);
-    //     var values = [];
-    //     for (let i = 0; i <= 5; i++) {
-    //         var object = tipos[i];
-    //         console.log(object[property]);
-    //         // values.push(object[property]);
-    //         for (var property in object) {
-    //         }}
-    // }
-        // setData1({
-        //     labels: ["Crédito","Débito","Saque", "Transferencia" ],
-        //     datasets: [
-        //     {
-        //         data: []
-        //     }
-        //     ]
-        // })
+    const printMeta = (valor) => {
+        setMeta(valor)
+    }
 
-    // const printTag = (tags) => {
-    //     data.data.forEach[tags['SUM(valor)']]
-    // }
 
     useFocusEffect(
         React.useCallback(() => {
             Movimentacao.saldo(UserId)
-            .then((valor) => printSaldo(valor['SUM(valor)']))
-            .catch(err => alert(err))
-            // Movimentacao.countTipo(UserId)
-            //     .then((tipos) => printTipo(tipos))
-            //     .catch(err => alert(err))
-            // Movimentacao.countTag(UserId)
-            //     .then((tags) => console.log(tags))
-            //     .catch(err => alert(err))
+                .then((valor) => printSaldo(valor['SUM(valor)']))
+                .catch(err => alert(err)),
+                Metas.meta(UserId)
+                    .then((valor) => printMeta(valor.valor))
+                    .catch(err => alert(err))
         })
     );
 
-    // const data1 = {
-    //             labels: ["Crédito","Débito","Saque", "Transferencia" ],
-    //             datasets: [
-    //             {
-    //                 data: []
-    //             }
-    //             ]
-    //         }
-    
-
-    //   const data = {
-    //     labels: ["Lazer", "Alime.", "Trans.", "Mer."], // optional
-    //     data: [0.4, 0.6, 0.8, 0.1]
-    // };
-    
     return (
         <PaperProvider theme={theme}>
             <ScrollView style={styles.background}>
@@ -107,6 +69,7 @@ export function Inicial({ route, navigation }) {
 
 
                             <Card.Content>
+                                <Title style={styles.saldo}>Valor da meta: {meta || parseFloat(0.00)}</Title>
                                 <Title style={styles.saldo}>Saldo de Gastos: {salMov || parseFloat(0.00)}</Title>
 
 
@@ -121,10 +84,7 @@ export function Inicial({ route, navigation }) {
                                     Registrar Meta
                                 </Button>
 
-                                {/* <Button mode='contained' style={styles.cardLogin}
-                                    onPress={() => navigation.navigate('Historico', { UserId: UserId, OtherParam: OtherParam })}>
-                                    Historico
-                                </Button> */}
+
                             </Card.Content>
 
                             <Text style={styles.tipo}>Gráfico de Tags</Text>
@@ -151,10 +111,18 @@ export function Inicial({ route, navigation }) {
                                 verticalLabelRotation={27}
                             />
 
+                            <Card.Content>
+                                <Button mode='contained' style={styles.cardLogin}
+                                    onPress={() => navigation.navigate('Historico', { UserId: UserId, OtherParam: OtherParam })}>
+                                    Historico
+                                </Button>
+
+                            </Card.Content>
+
                         </Card>
                     </View>
                 </View>
-            </ScrollView>
-        </PaperProvider>
+            </ScrollView >
+        </PaperProvider >
     );
 }

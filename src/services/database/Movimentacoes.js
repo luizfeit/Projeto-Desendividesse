@@ -6,7 +6,7 @@ import  db  from "./SqLiteDataBase";
 */
 db.transaction((tx) =>{
     //<<<<<<SOMENTE PARA TESTES>>>>>>
-    // tx.executeSql("DROP TABLE usuarios;");
+     //tx.executeSql("DROP TABLE movimentacoes;");
     //<<<<<<SOMENTE PARA TESTES>>>>>>
 
     tx.executeSql(
@@ -114,6 +114,8 @@ db.transaction((tx) =>{
     });
   });
 };
+
+
 
    /**
  * BUSCA SALDO TOTAL DO USUARIO
@@ -244,7 +246,7 @@ db.transaction((tx) =>{
      saldo,
      countTag,
      countTipo,
-     historico
+     historico,
    };
 
 

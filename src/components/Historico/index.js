@@ -4,13 +4,12 @@ import { ScrollView, View , Text} from 'react-native';
 
 import { styles, theme } from './styles';
 
-import { useFocusEffect } from '@react-navigation/native';
+import {Tabela} from './tabela';
 
 import {
   Provider as PaperProvider,
   DataTable} from 'react-native-paper';
 
-import Movimentacao from '../../services/database/Movimentacoes';
 
 
 export function Historico ({ route, navigation }) {

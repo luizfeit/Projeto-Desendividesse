@@ -138,6 +138,24 @@ db.transaction((tx) =>{
        });
      });
    };
+
+   const meta = (id) => {
+    return new Promise((resolve, reject) => {
+      db.transaction((tx) => {
+        //comando SQL modificável
+        tx.executeSql(
+          "SELECT valor FROM metas WHERE id_user = ? ORDER BY valor DESC",
+          [id],
+          //-----------------------
+          (_, { rows }) => {
+            if (rows.length > 0) resolve(rows._array[0]);
+             // nenhum registro encontrado
+          },
+          (_, error) => reject(error) // erro interno em tx.executeSql
+        );
+      });
+    });
+  };
    
    /**
     * REMOVE UM REGISTRO POR MEIO DO ID
@@ -170,6 +188,7 @@ db.transaction((tx) =>{
      findUser,
      all,
      remove,
+     meta
    };
 
 

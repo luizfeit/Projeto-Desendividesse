@@ -12,14 +12,13 @@ import Movimentacao from '../../services/database/Movimentacoes';
 import { useFocusEffect } from '@react-navigation/core';
 import { useContext } from 'react/cjs/react.development';
 
-export function Tabela() {
-
+export function Tabela({route}) { 
   const [id_mov, setIdMov] = useState()
   const [tag, setTag] = useState()
   const [val, setVal] = useState()
 
   useFocusEffect(() => {
-    Movimentacao.historico(1)
+    Movimentacao.historico(3)
       .then((valor) => valor.forEach(v => {
           setIdMov(v.id_mov), setTag(v.tag), setVal(v.valor)
       }))
