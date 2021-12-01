@@ -36,6 +36,8 @@ export function Inicial({ route, navigation }) {
 
     const { UserId, OtherParam } = route.params;
     const [salMov, setSalMov] = useState(null);
+    const [data1, setData1] = useState(null);
+    const [data, setData] = useState(null);
 
 
     const printSaldo = (valor) => {
@@ -43,12 +45,28 @@ export function Inicial({ route, navigation }) {
     }
 
     const printTipo = (tipos) => {
-
+        tipos.push(tipos[0]);
+        for (let i = 0; i <= 5; i++) {
+            let object = tipos[i];
+            console.log(object[property]);
+            for (var property in object) {
+                let newarray = object[property];
+            //   console.log('item ' + i + ': ' + object[property]);
+            // console.log(newarray);
+            }}
+        // setData1({
+        //     labels: ["Crédito","Débito","Saque", "Transferencia" ],
+        //     datasets: [
+        //     {
+        //         data: []
+        //     }
+        //     ]
+        // })
     }
 
-    const printTag = (tags) => {
-        data.data.forEach[tags['SUM(valor)']]
-    }
+    // const printTag = (tags) => {
+    //     data.data.forEach[tags['SUM(valor)']]
+    // }
 
     useFocusEffect(
         React.useCallback(() => {
@@ -56,28 +74,28 @@ export function Inicial({ route, navigation }) {
             .then((valor) => printSaldo(valor['SUM(valor)']))
             .catch(err => alert(err))
             Movimentacao.countTipo(UserId)
-                .then((tipos) => console.log(tipos))
+                .then((tipos) => printTipo(tipos))
                 .catch(err => alert(err))
-            Movimentacao.countTag(UserId)
-                .then((tags) => console.log(tags))
-                .catch(err => alert(err))
+            // Movimentacao.countTag(UserId)
+            //     .then((tags) => console.log(tags))
+            //     .catch(err => alert(err))
         })
     );
 
-    const data1 = {
-                labels: ["Crédito","Débito","Saque", "Transferencia" ],
-                datasets: [
-                {
-                    data: []
-                }
-                ]
-            }
+    // const data1 = {
+    //             labels: ["Crédito","Débito","Saque", "Transferencia" ],
+    //             datasets: [
+    //             {
+    //                 data: []
+    //             }
+    //             ]
+    //         }
     
 
-      const data = {
-        labels: ["Lazer", "Alime.", "Trans.", "Mer."], // optional
-        data: [0.4, 0.6, 0.8, 0.1]
-    };
+    //   const data = {
+    //     labels: ["Lazer", "Alime.", "Trans.", "Mer."], // optional
+    //     data: [0.4, 0.6, 0.8, 0.1]
+    // };
     
     return (
         <PaperProvider theme={theme}>
@@ -107,7 +125,7 @@ export function Inicial({ route, navigation }) {
                                 </Button>
                             </Card.Content>
 
-                            <Text style={styles.tipo}>Gráfico de Tags</Text>
+                            {/* <Text style={styles.tipo}>Gráfico de Tags</Text>
                             <View>
                                 <ProgressChart
                                     width={screenWidth}
@@ -129,7 +147,7 @@ export function Inicial({ route, navigation }) {
                                 yAxisLabel="R$"
                                 chartConfig={chartConfig1}
                                 verticalLabelRotation={27}
-                            />
+                            /> */}
 
                         </Card>
                     </View>
