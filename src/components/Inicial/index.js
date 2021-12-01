@@ -44,16 +44,16 @@ export function Inicial({ route, navigation }) {
         setSalMov(valor);
     }
 
-    const printTipo = (tipos) => {
+    function printTipo (tipos) {
         tipos.push(tipos[0]);
+        var values = [];
         for (let i = 0; i <= 5; i++) {
-            let object = tipos[i];
+            var object = tipos[i];
             console.log(object[property]);
+            // values.push(object[property]);
             for (var property in object) {
-                let newarray = object[property];
-            //   console.log('item ' + i + ': ' + object[property]);
-            // console.log(newarray);
             }}
+    }
         // setData1({
         //     labels: ["Crédito","Débito","Saque", "Transferencia" ],
         //     datasets: [
@@ -62,8 +62,6 @@ export function Inicial({ route, navigation }) {
         //     }
         //     ]
         // })
-    }
-
     // const printTag = (tags) => {
     //     data.data.forEach[tags['SUM(valor)']]
     // }
@@ -73,9 +71,9 @@ export function Inicial({ route, navigation }) {
             Movimentacao.saldo(UserId)
             .then((valor) => printSaldo(valor['SUM(valor)']))
             .catch(err => alert(err))
-            Movimentacao.countTipo(UserId)
-                .then((tipos) => printTipo(tipos))
-                .catch(err => alert(err))
+            // Movimentacao.countTipo(UserId)
+            //     .then((tipos) => printTipo(tipos))
+            //     .catch(err => alert(err))
             // Movimentacao.countTag(UserId)
             //     .then((tags) => console.log(tags))
             //     .catch(err => alert(err))
@@ -122,6 +120,11 @@ export function Inicial({ route, navigation }) {
                                 <Button mode='contained' style={styles.cardLogin}
                                     onPress={() => navigation.navigate('RegistroMeta', { UserId: UserId, OtherParam: OtherParam })}>
                                     Registrar Meta
+                                </Button>
+
+                                <Button mode='contained' style={styles.cardLogin}
+                                    onPress={() => navigation.navigate('Historico', { UserId: UserId, OtherParam: OtherParam })}>
+                                    Historico
                                 </Button>
                             </Card.Content>
 

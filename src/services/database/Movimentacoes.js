@@ -187,6 +187,29 @@ db.transaction((tx) =>{
        });
      });
    };
+
+      /**
+    * BUSCA TODOS OS REGISTROS DE UMA DETERMINADA TABELA
+    * - Não recebe parâmetros;
+    * - Retorna uma Promise:
+    *  - O resultado da Promise é uma lista (Array) de objetos;
+    *  - Pode retornar erro (reject) caso o ID não exista ou então caso ocorra erro no SQL;
+    *  - Pode retornar um array vazio caso não existam registros.
+    */
+       const historico = (id) => {
+        return new Promise((resolve, reject) => {
+          db.transaction((tx) => {
+            //comando SQL modificável
+            tx.executeSql(
+              "SELECT id_mov, tag, valor FROM movimentacoes where id_user=?",
+              [id],
+              //-----------------------
+              (_, { rows }) => resolve(rows._array),
+              (_, error) => reject(error) // erro interno em tx.executeSql
+            );
+          });
+        });
+      };
    
    /**
     * REMOVE UM REGISTRO POR MEIO DO ID
@@ -220,7 +243,8 @@ db.transaction((tx) =>{
      remove,
      saldo,
      countTag,
-     countTipo
+     countTipo,
+     historico
    };
 
 
