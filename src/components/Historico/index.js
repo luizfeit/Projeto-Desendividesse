@@ -6,10 +6,9 @@ import { styles, theme } from './styles';
 
 import { useFocusEffect } from '@react-navigation/native';
 
-import DataTable from "react-data-table-component";
-
 import {
-  Provider as PaperProvider} from 'react-native-paper';
+  Provider as PaperProvider,
+  DataTable} from 'react-native-paper';
 
 import Movimentacao from '../../services/database/Movimentacoes';
 
