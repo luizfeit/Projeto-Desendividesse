@@ -20,7 +20,7 @@ import {
 import Movimentacao from '../../services/database/Movimentacoes';
 
 import { data, screenWidth, chartConfig } from './GraficoTag'
-import { screenWidth1, chartConfig1 } from './GraficoGasto'
+import { data1, screenWidth1, chartConfig1 } from './GraficoGasto'
 
 import {
     LineChart,
@@ -36,24 +36,22 @@ export function Inicial({ route, navigation }) {
 
     const { UserId, OtherParam } = route.params;
     const [salMov, setSalMov] = useState(null);
-    const [data1, setData1] = useState(null);
-    const [data, setData] = useState(null);
 
 
     const printSaldo = (valor) => {
         setSalMov(valor);
     }
 
-    function printTipo (tipos) {
-        tipos.push(tipos[0]);
-        var values = [];
-        for (let i = 0; i <= 5; i++) {
-            var object = tipos[i];
-            console.log(object[property]);
-            // values.push(object[property]);
-            for (var property in object) {
-            }}
-    }
+    // function printTipo (tipos) {
+    //     tipos.push(tipos[0]);
+    //     var values = [];
+    //     for (let i = 0; i <= 5; i++) {
+    //         var object = tipos[i];
+    //         console.log(object[property]);
+    //         // values.push(object[property]);
+    //         for (var property in object) {
+    //         }}
+    // }
         // setData1({
         //     labels: ["Crédito","Débito","Saque", "Transferencia" ],
         //     datasets: [
@@ -62,6 +60,7 @@ export function Inicial({ route, navigation }) {
         //     }
         //     ]
         // })
+
     // const printTag = (tags) => {
     //     data.data.forEach[tags['SUM(valor)']]
     // }
@@ -122,13 +121,13 @@ export function Inicial({ route, navigation }) {
                                     Registrar Meta
                                 </Button>
 
-                                <Button mode='contained' style={styles.cardLogin}
+                                {/* <Button mode='contained' style={styles.cardLogin}
                                     onPress={() => navigation.navigate('Historico', { UserId: UserId, OtherParam: OtherParam })}>
                                     Historico
-                                </Button>
+                                </Button> */}
                             </Card.Content>
 
-                            {/* <Text style={styles.tipo}>Gráfico de Tags</Text>
+                            <Text style={styles.tipo}>Gráfico de Tags</Text>
                             <View>
                                 <ProgressChart
                                     width={screenWidth}
@@ -150,7 +149,7 @@ export function Inicial({ route, navigation }) {
                                 yAxisLabel="R$"
                                 chartConfig={chartConfig1}
                                 verticalLabelRotation={27}
-                            /> */}
+                            />
 
                         </Card>
                     </View>

@@ -12,7 +12,13 @@ const chartConfig = {
     barPercentage: 0.5,
 };
 
+      const data = {
+        labels: ["Lazer", "Alime.", "Trans.", "Mer."], // optional
+        data: [0.4, 0.6, 0.8, 0.1]
+    };
+
 export {
     screenWidth,
-    chartConfig
+    chartConfig,
+    data
 }

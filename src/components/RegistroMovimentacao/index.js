@@ -28,7 +28,8 @@ export function RegistroMovimentacao({ route, navigation }) {
     const RegistrarMovimentacao = (valor, tipo, tag, descricao, id_user) => {
         id_user = UserId;
         Movimentacoes.create({ valor, tipo, tag, descricao, id_user} )
-            .then(() => Alert.alert("Movimentação registrada com Sucesso"))
+            .then(() => Alert.alert("Movimentação registrada com Sucesso"), 
+            navigation.navigate('Inicial', { UserId: UserId, OtherParam: OtherParam }))
             .catch(err => alert(err)) 
     }
 

@@ -6,32 +6,21 @@ import { styles, theme } from './styles';
 
 import { useFocusEffect } from '@react-navigation/native';
 
-import Tabela from './tabela';
+import DataTable from "react-data-table-component";
 
 import {
-  Provider as PaperProvider,
-  DataTable } from 'react-native-paper';
+  Provider as PaperProvider} from 'react-native-paper';
 
 import Movimentacao from '../../services/database/Movimentacoes';
 
-import { Header } from '../Header/header.component';
 
 export function Historico ({ route, navigation }) {
   const { UserId, OtherParam } = route.params;
-  const {data, setData} = useState(null);
 
-//   useFocusEffect(
-//     React.useCallback(() => {
-//       Movimentacao.historico(UserId)
-//       .then((valor) => valor.forEach( v => printHist(v)))
-//       .catch(err => alert(err))
-//     })
-// );
-
-    return (
-        <PaperProvider theme={theme}>
-            <ScrollView style={styles.background}>
-            <DataTable>
+return (
+  <PaperProvider theme={theme}>
+    <ScrollView style={styles.background}>
+      <DataTable>
         <DataTable.Header>
           <DataTable.Title>Id</DataTable.Title>
           <DataTable.Title>Tag</DataTable.Title>
@@ -46,9 +35,9 @@ export function Historico ({ route, navigation }) {
         />
       </DataTable>
 
-            </ScrollView>
-        </PaperProvider>
-        
+    </ScrollView>
+  </PaperProvider>
 
-    );
+
+);
 }

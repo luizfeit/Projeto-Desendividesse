@@ -41,9 +41,10 @@ export function RegistroMeta({ route, navigation }) {
 
     const RegistrarMeta = (titulo, data, valor, descricao, id_user) => {
         id_user = UserId;
-        data = date;
+        // data = date;
         Metas.create({ titulo, data, valor, descricao, id_user })
-            .then(() => Alert.alert("Meta registrada com Sucesso!"))
+            .then(() => Alert.alert("Meta registrada com Sucesso!"), 
+            navigation.navigate('Inicial', { UserId: UserId, OtherParam: OtherParam }))
             .catch(err => alert(err))
     }
 

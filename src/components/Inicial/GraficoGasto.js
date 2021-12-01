@@ -12,7 +12,17 @@ const chartConfig1 = {
     barPercentage: 0.5,
 };
 
+    const data1 = {
+                labels: ["Crédito","Débito","Saque", "Transferencia" ],
+                datasets: [
+                {
+                    data: [1,5,4,7]
+                }
+                ]
+            }
+
 export {
     screenWidth1,
-    chartConfig1
+    chartConfig1,
+    data1
 }
